@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y c-icap libicapapi-dev clamav curl less vim libc-icap-mod-virus-scan && \
+    apt-get install -y c-icap libicapapi-dev clamav curl less vim libc-icap-mod-virus-scan nginx libnginx-mod-stream && \
     usermod -a -G c-icap c-icap && \
     mkdir -p /var/run/c-icap && \
     touch /var/run/c-icap/c-icap.id && \
@@ -18,7 +18,7 @@ RUN apt-get update && \
     echo "Include clamav_mod.conf" >> /etc/c-icap/virus_scan.conf
 
 ADD ./entrypoint.sh /entrypoint.sh
+ADD ./nginx.conf /etc/nginx/nginx.conf
 RUN chmod +x /entrypoint.sh
-USER c-icap
 ENTRYPOINT ["/entrypoint.sh"]
 
