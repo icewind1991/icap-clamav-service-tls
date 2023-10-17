@@ -1,4 +1,5 @@
 FROM ubuntu:22.04
+LABEL org.opencontainers.image.source="https://github.com/icewind1991/icap-clamav-service-tls"
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y c-icap libicapapi-dev clamav curl less vim libc-icap-mod-virus-scan nginx libnginx-mod-stream && \
